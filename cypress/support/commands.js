@@ -23,3 +23,21 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('login', (username, password) => {
+  cy.session('loginSession', () => {
+    cy.visit('/')
+    cy.get('.login_logo').should('be.visible')
+    cy.get('[data-test="username"]').should('be.visible').type(username)
+    cy.get('[data-test="password"]').should('be.visible').type(password)
+    cy.get('#login-button').should('be.visible').should('not.be.disabled').click()
+
+    cy.get('button').contains('Add to cart')
+  }, {
+    validate() {
+      cy.document()
+        .its('cookie')
+        .should('contain', username)
+      }
+  })
+})
