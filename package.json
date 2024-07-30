@@ -1,0 +1,13 @@
+{
+  "name": "cypress_poc",
+  "version": "1.0.0",
+  "description": "Learning cypress",
+  "scripts": {
+    "cy:open": "cypress open"
+  },
+  "author": "Muhammad Rasyid Fahroni",
+  "license": "MIT",
+  "devDependencies": {
+    "cypress": "^13.13.1"
+  }
+}
