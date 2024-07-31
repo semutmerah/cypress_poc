@@ -8,10 +8,9 @@
 
 describe('sort feature', () => {
   beforeEach(() => {
-    const username = 'standard_user'
-    const password = 'secret_sauce'
-
-    cy.login(username, password)
+    cy.fixture("credentials").then(cred => {
+      cy.login(cred.username, cred.password)
+    })
   })
 
   it('able to sort price (low to high)', () => {
