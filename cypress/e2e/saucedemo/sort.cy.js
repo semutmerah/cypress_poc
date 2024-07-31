@@ -65,4 +65,50 @@ describe('sort feature', () => {
       }
     })
   })
+
+  it('able to sort by name alphabetically (A to Z)', () => {
+    cy.visit('/inventory.html', { failOnStatusCode: false })
+    cy.get('[data-test="product-sort-container"]')
+      .select('Name (A to Z)')
+    cy.get('[data-test="product-sort-container"]')
+      .should('have.value', 'az')
+
+    // Assert the sort is correct
+    // Create an empty array to store the names
+    let names = [];
+
+    // Find all elements with the data-test attribute and extract their text
+    cy.get('[data-test="inventory-item-name"]').each(($el) => {
+      // Push the text content of each element to the names array
+      names.push($el.text());
+    }).then(() => {
+      // Check that the names array is sorted alphabetically
+      for (let i = 0; i < names.length - 1; i++) {
+        expect(names[i].localeCompare(names[i + 1])).to.be.at.most(0);
+      }
+    })
+  })
+
+  it('able to sort by name in reverse (Z to A)', () => {
+    cy.visit('/inventory.html', { failOnStatusCode: false })
+    cy.get('[data-test="product-sort-container"]')
+      .select('Name (Z to A)')
+    cy.get('[data-test="product-sort-container"]')
+      .should('have.value', 'za')
+
+    // Assert the sort is correct
+    // Create an empty array to store the names
+    let names = [];
+
+    // Find all elements with the data-test attribute and extract their text
+    cy.get('[data-test="inventory-item-name"]').each(($el) => {
+      // Push the text content of each element to the names array
+      names.push($el.text());
+    }).then(() => {
+      // Check that the names array is sorted alphabetically
+      for (let i = 0; i < names.length - 1; i++) {
+        expect(names[i].localeCompare(names[i + 1])).to.be.at.least(0);
+      }
+    })
+  })
 })
