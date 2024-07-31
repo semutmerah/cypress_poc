@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "Learning cypress",
   "scripts": {
-    "cy:open": "cypress open"
+    "cy:open": "cypress open",
+    "e2e:headed:chrome": "cypress run --browser chrome --headed",
+    "e2e:chrome": "cypress run --browser chrome"
   },
   "author": "Muhammad Rasyid Fahroni",
   "license": "MIT",
